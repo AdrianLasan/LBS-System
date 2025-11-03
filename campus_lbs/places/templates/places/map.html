@@ -38,11 +38,15 @@
     const features = L.geoJSON().addTo(map);
 
     async function loadAll(){
-      const res = await fetch('/api/places/');
-      const data = await res.json();
-      features.clearLayers();
-      features.addData(data);
-    }
+  const res = await fetch('/api/places/');
+  let data = await res.json();
+  if (Array.isArray(data)) {  // wrap list as FeatureCollection
+    data = { type: 'FeatureCollection', features: data };
+  }
+  features.clearLayers();
+  features.addData(data);
+}
+
 
     async function loadWithin(){
       const r = document.getElementById('radius').value;

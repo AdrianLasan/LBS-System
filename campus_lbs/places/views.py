@@ -13,6 +13,11 @@ class PlaceViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_fields = ['category']
     search_fields = ['name', 'description']
     ordering_fields = ['name']
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({'type': 'FeatureCollection', 'features': serializer.data})
 
 @api_view(['GET'])
 def nearest(request):
