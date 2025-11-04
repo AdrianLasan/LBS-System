@@ -1,4 +1,4 @@
-# Campus LBS (Starter Kit)
+# Campus LBS
 
 A minimal Location-Based Service (LBS) app using **Django + PostGIS + DRF + Leaflet**.
 
