@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(env_file=os.path.join(BASE_DIR, '..', '.env'))
 
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='unsafe-key')
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='123456789')
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 ALLOWED_HOSTS = [h.strip() for h in env('ALLOWED_HOSTS', default='*').split(',')]
 
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework_gis',
-    'places',
+    'campus_lbs.places.apps.PlacesConfig',
 ]
 
 MIDDLEWARE = [
@@ -33,7 +33,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'campus_lbs.config.urls'
 
 TEMPLATES = [
     {
@@ -51,18 +51,19 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'campus_lbs.config.wsgi.application'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': env('DB_NAME', default='campus_lbs'),
-        'USER': env('DB_USER', default='postgres'),
-        'PASSWORD': env('DB_PASSWORD', default='postgres'),
-        'HOST': env('DB_HOST', default='127.0.0.1'),
-        'PORT': env('DB_PORT', default='5432'),
+        'NAME': 'campus_lbs',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
@@ -70,6 +71,10 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ]
+}
+
+MIGRATION_MODULES = {
+    'places': 'campus_lbs.places.migrations',
 }
 
 LANGUAGE_CODE = 'en-us'

@@ -1,1 +1,4 @@
-[{"model": "places.category", "pk": 1, "fields": {"name": "Cafe"}}, {"model": "places.category", "pk": 2, "fields": {"name": "Library"}}, {"model": "places.category", "pk": 3, "fields": {"name": "Lab"}}, {"model": "places.place", "pk": 1, "fields": {"name": "Grangegorman Cafe", "category": 1, "location": "POINT(-6.2786 53.3556)", "description": "Coffee and snacks"}}, {"model": "places.place", "pk": 2, "fields": {"name": "Main Library", "category": 2, "location": "POINT(-6.2778 53.3550)", "description": "Books and study spaces"}}, {"model": "places.place", "pk": 3, "fields": {"name": "GIS Lab", "category": 3, "location": "POINT(-6.2795 53.3562)", "description": "Spatial data lab"}}]
+[
+  { "model": "places.category", "pk": 1, "fields": { "name": "Cafe" } },
+  { "model": "places.place", "pk": 1, "fields": { "name": "Campus Cafe", "category": 1 } }
+]
