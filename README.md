@@ -55,3 +55,20 @@ docker compose up --build
 ## Notes
 - Timezone: Europe/Dublin
 - SRID 4326 (WGS84)
+
+## Why it worked before (Docker) and why it broke now
+
+## Folder layout vs import paths
+- 'places' and 'config' live under campus_lbs/, but code/      settings were written as if they were top-level ("places", "config").
+- Django then couldn’t find the app’s migrations or the right settings module.
+
+## GDAL not discoverable on Windows
+- Without OSGeo4W (and PATH/GDAL_DATA/PROJ_LIB), django.contrib.gis raises:
+“Could not find the GDAL library … Is GDAL installed?”
+
+## Loading fixtures before migrating
+- Running loaddata before the places tables exist causes:
+relation "places_category" does not exist
+
+## Multiple manage.py or wrong settings module
+- DJANGO_SETTINGS_MODULE points to config.settings instead of campus_lbs.config.settings, Django uses the wrong project.
